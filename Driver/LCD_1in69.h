@@ -48,5 +48,6 @@ void LCD_1IN69_Clear(UWORD Color);
 void LCD_1IN69_Display(UWORD *Image);
 void LCD_1IN69_DisplayWindows(UWORD Xstart, UWORD Ystart, UWORD Xend, UWORD Yend, UWORD *Image);
 void LCD_1IN69_DrawPoint(UWORD X, UWORD Y, UWORD Color);
+void LCD_Fill(UWORD Xstart, UWORD Ystart, UWORD Xend, UWORD Yend,UWORD Color);
 void LCD_1IN69_SetBackLight(UWORD Value);
 #endif

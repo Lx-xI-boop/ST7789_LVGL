@@ -6,27 +6,21 @@
 
 void LCD_1in69_test()
 {
-    printf("LCD_1IN69 Demo\r\n");
     DEV_Module_Init();
 
-    printf("LCD_1IN69_ Init and Clear...\r\n");
     LCD_1IN69_SetBackLight(1000);
     LCD_1IN69_Init(VERTICAL);
     LCD_1IN69_Clear(WHITE);
     
 #if 1
-    printf("Paint_NewImage\r\n");
     Paint_NewImage(LCD_1IN69_WIDTH, LCD_1IN69_HEIGHT, 0, WHITE);
 
-    printf("Set Clear and Display Funtion\r\n");
     Paint_SetClearFuntion(LCD_1IN69_Clear);
     Paint_SetDisplayFuntion(LCD_1IN69_DrawPoint);
 
-    printf("Paint_Clear\r\n");
     Paint_Clear(WHITE);
     DEV_Delay_ms(100);
 
-    printf("drawing...\r\n");
     Paint_SetRotate(180);
     Paint_DrawString_EN(30, 10, "123", &Font24, YELLOW, RED);  
     Paint_DrawString_EN(30, 34, "ABC", &Font24, BLUE, CYAN);
@@ -51,18 +45,14 @@ void LCD_1in69_test()
 
 
 #if 1
-    printf("Paint_NewImage\r\n");
     Paint_NewImage(LCD_1IN69_WIDTH, LCD_1IN69_HEIGHT, 90, WHITE);
 
-    printf("Set Clear and Display Funtion\r\n");
     Paint_SetClearFuntion(LCD_1IN69_Clear);
     Paint_SetDisplayFuntion(LCD_1IN69_DrawPoint);
 
-    printf("Paint_Clear\r\n");
     Paint_Clear(WHITE);
     DEV_Delay_ms(100);
 
-    printf("drawing...\r\n");
     Paint_DrawString_EN(30, 10, "123", &Font24, YELLOW, RED);  
     Paint_DrawString_EN(30, 34, "ABC", &Font24, BLUE, CYAN);
     
@@ -84,7 +74,6 @@ void LCD_1in69_test()
     DEV_Delay_ms(3000);
 #endif
 
-    printf("quit...\r\n");
     DEV_Module_Exit();
 }
 

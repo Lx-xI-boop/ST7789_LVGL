@@ -18,13 +18,18 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "i2c.h"
 #include "spi.h"
 #include "tim.h"
+#include "usart.h"
 #include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "LCD_Test.h"
+#include "image.h"
+#include "LCD_1in69.h"
+#include "DEV_Config.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -100,15 +105,29 @@ int main(void)
   MX_GPIO_Init();
   MX_TIM3_Init();
   MX_SPI1_Init();
+  MX_I2C1_Init();
+  MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
 	HAL_TIM_PWM_Start(&htim3,TIM_CHANNEL_1);
   /* USER CODE END 2 */
-	LCD_1in69_test();
+
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+	HAL_UART_Transmit(&huart1,"hello",5,10);
+	
+	DEV_Module_Init();
+	LCD_1IN69_SetBackLight(1000);
+	LCD_1IN69_Init(VERTICAL);
+	LCD_1IN69_Clear(WHITE);
   while (1)
   {
-
+		LCD_Fill(0,0,240,280,BLACK);
+		LCD_Fill(0,0,240,280,WHITE);
+		LCD_Fill(0,0,240,280,RED);
+		LCD_Fill(0,0,240,280,BLUE);
+		LCD_Fill(0,0,240,280,GREEN);
+		LCD_Fill(0,0,240,280,GRAY);
+		LCD_Fill(0,0,240,280,BRRED);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

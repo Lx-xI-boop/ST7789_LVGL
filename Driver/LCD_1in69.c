@@ -308,6 +308,35 @@ void LCD_1IN69_DisplayWindows(UWORD Xstart, UWORD Ystart, UWORD Xend, UWORD Yend
     }
 }
 
+void LCD_Fill(UWORD Xstart, UWORD Ystart, UWORD Xend, UWORD Yend, UWORD Color)
+{
+    UWORD i, j;
+    UWORD width = Xend - Xstart;
+    UWORD height = Yend - Ystart;
+
+    // 1. 关键：只设置一次显示窗口
+    LCD_1IN69_SetWindows(Xstart, Ystart, Xend, Yend);
+
+    // 2. 拉高 DC 引脚，准备发送颜色数据（Data）
+    LCD_1IN69_DC_1;
+    // 如果你的驱动里 CS 需要手动控制，这里也要拉低 CS
+    // LCD_1IN69_CS_0; 
+
+    // 3. 拆分颜色字节（提前计算好，避免在循环内重复计算）
+    UBYTE color_high = (Color >> 8) & 0xFF;
+    UBYTE color_low = Color & 0xFF;
+
+    // 4. 连续发送像素点数据
+    for (i = 0; i < height; i++) {
+        for (j = 0; j < width; j++) {
+            DEV_SPI_WRITE(color_high);
+            DEV_SPI_WRITE(color_low);
+        }
+    }
+
+    // LCD_1IN69_CS_1; // 结束发送后拉高 CS
+}
+
 void LCD_1IN69_DrawPoint(UWORD X, UWORD Y, UWORD Color)
 {
     LCD_1IN69_SetWindows(X, Y, X, Y);

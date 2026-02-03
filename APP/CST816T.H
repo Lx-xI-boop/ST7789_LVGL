@@ -54,7 +54,7 @@ uint16_t CST816T_GetXpos(void);				// 获取点击的X坐标
 uint16_t CST816T_GetYpos(void);				// 获取点击的Y坐标
 uint8_t CST816T_GetChipID(void);				// 获取芯片ID
 uint8_t CST816T_GetRegisterData(uint8_t reg);	// 获取单个寄存器数据
-
+uint8_t CST816T_Read_Sensor(uint16_t *x, uint16_t *y);
 
 #endif
 

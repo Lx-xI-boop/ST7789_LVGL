@@ -34,6 +34,17 @@ st7789_demo\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h
 st7789_demo\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h
 st7789_demo\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
 st7789_demo\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
+st7789_demo\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os.h
+st7789_demo\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
+st7789_demo\main.o: ../Core/Inc/FreeRTOSConfig.h
+st7789_demo\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
+st7789_demo\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h
+st7789_demo\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/deprecated_definitions.h
+st7789_demo\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F/portmacro.h
+st7789_demo\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/mpu_wrappers.h
+st7789_demo\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h
+st7789_demo\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/list.h
+st7789_demo\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h
 st7789_demo\main.o: ../Core/Inc/i2c.h
 st7789_demo\main.o: ../Core/Inc/spi.h
 st7789_demo\main.o: ../Core/Inc/tim.h
@@ -48,3 +59,4 @@ st7789_demo\main.o: ../Driver/fonts.h
 st7789_demo\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 st7789_demo\main.o: ../Driver/image.h
 st7789_demo\main.o: ../Driver/LCD_1in69.h
+st7789_demo\main.o: ../APP/CST816T.h

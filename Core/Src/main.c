@@ -18,6 +18,7 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "cmsis_os.h"
 #include "i2c.h"
 #include "spi.h"
 #include "tim.h"
@@ -30,6 +31,7 @@
 #include "image.h"
 #include "LCD_1in69.h"
 #include "DEV_Config.h"
+#include "CST816T.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -55,23 +57,14 @@
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
+void MX_FREERTOS_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-void led_proc(void)
-{
-	static uint32_t time_old = 0;
-	uint32_t time_now = HAL_GetTick();
-	if(time_now - time_old >= 500)
-	{
-		HAL_GPIO_TogglePin(GPIOC,GPIO_PIN_13);
-		time_old = time_now;
-	}
-	
-}
+
 /* USER CODE END 0 */
 
 /**
@@ -111,27 +104,27 @@ int main(void)
 	HAL_TIM_PWM_Start(&htim3,TIM_CHANNEL_1);
   /* USER CODE END 2 */
 
+  /* Init scheduler */
+  osKernelInitialize();
+
+  /* Call init function for freertos objects (in cmsis_os2.c) */
+  MX_FREERTOS_Init();
+
+  /* Start scheduler */
+  osKernelStart();
+
+  /* We should never get here as control is now taken by the scheduler */
+
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-	HAL_UART_Transmit(&huart1,"hello",5,10);
-	
-	DEV_Module_Init();
-	LCD_1IN69_SetBackLight(1000);
-	LCD_1IN69_Init(VERTICAL);
-	LCD_1IN69_Clear(WHITE);
   while (1)
   {
-		LCD_Fill(0,0,240,280,BLACK);
-		LCD_Fill(0,0,240,280,WHITE);
-		LCD_Fill(0,0,240,280,RED);
-		LCD_Fill(0,0,240,280,BLUE);
-		LCD_Fill(0,0,240,280,GREEN);
-		LCD_Fill(0,0,240,280,GRAY);
-		LCD_Fill(0,0,240,280,BRRED);
+
+		
+		
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-		led_proc();
   }
   /* USER CODE END 3 */
 }
@@ -184,6 +177,28 @@ void SystemClock_Config(void)
 /* USER CODE BEGIN 4 */
 
 /* USER CODE END 4 */
+
+/**
+  * @brief  Period elapsed callback in non blocking mode
+  * @note   This function is called  when TIM1 interrupt took place, inside
+  * HAL_TIM_IRQHandler(). It makes a direct call to HAL_IncTick() to increment
+  * a global variable "uwTick" used as application time base.
+  * @param  htim : TIM handle
+  * @retval None
+  */
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
+  /* USER CODE BEGIN Callback 0 */
+
+  /* USER CODE END Callback 0 */
+  if (htim->Instance == TIM1)
+  {
+    HAL_IncTick();
+  }
+  /* USER CODE BEGIN Callback 1 */
+
+  /* USER CODE END Callback 1 */
+}
 
 /**
   * @brief  This function is executed in case of error occurrence.
